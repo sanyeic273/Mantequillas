@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Belleza y Maquillaje</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #f9d5e5 0%, #e2b0d9 100%);
+            color: #5a4a4a;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        
+        header {
+            background: linear-gradient(to right, #e84393, #fd79a8);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+        
+        .tagline {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 30px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            flex-wrap: wrap;
+        }
+        
+        .nav-button {
+            padding: 16px 32px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-button:active {
+            transform: translateY(1px);
+        }
+        
+        .product-btn {
+            background: linear-gradient(to right, #e8a2c6, #d46a92);
+            color: white;
+        }
+        
+        .makeup-btn {
+            background: linear-gradient(to right, #fd79a8, #e84393);
+            color: white;
+        }
+        
+        .content-area {
+            padding: 40px;
+            min-height: 600px;
+        }
+        
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        footer {
+            background: #8a4f7d;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .social-links {
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            transform: scale(1.2);
+        }
+        
+        .copyright {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-button {
+                width: 80%;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .tagline {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Estilos para la sección de Mantequillas Corporales */
+        .mantequillas-header {
+            background: linear-gradient(135deg, #f8d7ea 0%, #f0b6d5 100%);
+            padding: 30px 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .mantequillas-logo {
+            font-size: 2.8rem;
+            color: #8a4f7d;
+            margin-bottom: 10px;
+        }
+        
+        .mantequillas-title {
+            font-size: 2.5rem;
+            color: #8a4f7d;
+            margin-bottom: 15px;
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+        
+        .mantequillas-tagline {
+            font-size: 1.2rem;
+            color: #a76c93;
+            font-style: italic;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .intro {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 0 20px;
+        }
+        
+        .intro p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+        
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .product-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 1px solid #f5e1ed;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-title {
+            font-size: 1.3rem;
+            color: #8a4f7d;
+            margin-bottom: 10px;
+        }
+        
+        .product-desc {
+            font-size: 0.95rem;
+            color: #7a6a6a;
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, #e8a2c6, #d46a92);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: 'Georgia', serif;
+        }
+        
+        .btn:hover {
+            background: linear-gradient(to right, #d46a92, #c2557f);
+            transform: scale(1.05);
+        }
+        
+        .benefits {
+            background: #fdf0f8;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 50px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .benefits h2 {
+            text-align: center;
+            color: #8a4f7d;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+        }
+        
+        .benefits-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .benefit-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .benefit-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #d46a92;
+        }
+        
+        .contact-section {
+            background: linear-gradient(135deg, #f8d7ea 0%, #f0b6d5 100%);
+            padding: 50px 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+        
+        .contact-section h2 {
+            color: #8a4f7d;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #8a4f7d;
+            font-weight: bold;
+        }
+        
+        .form-group input, 
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e8c3d8;
+            border-radius: 8px;
+            font-family: 'Georgia', serif;
+            font-size: 1rem;
+            transition: border 0.3s ease;
+        }
+        
+        .form-group input:focus, 
+        .form-group textarea:focus {
+            border-color: #d46a92;
+            outline: none;
+        }
+
+        /* Estilos para la sección de Maquillaje Virtual */
+        .maquillaje-content {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .face-container {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .face {
+            width: 280px;
+            height: 400px;
+            background: #ffe0bd;
+            margin: 20px auto;
+            border-radius: 50% 50% 40% 40%;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .eye {
+            position: absolute;
+            width: 30px;
+            height: 15px;
+            background: #333;
+            top: 100px;
+            border-radius: 50%;
+        }
+
+        .eye.left {
+            left: 70px;
+        }
+
+        .eye.right {
+            right: 70px;
+        }
+
+        .lipstick {
+            position: absolute;
+            width: 80px;
+            height: 25px;
+            background: #e84393;
+            bottom: 70px;
+            left: 100px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .blush {
+            position: absolute;
+            width: 50px;
+            height: 25px;
+            background: #ff9ff3;
+            top: 150px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .blush.left {
+            left: 40px;
+        }
+
+        .blush.right {
+            right: 40px;
+        }
+
+        .eyeshadow {
+            position: absolute;
+            width: 40px;
+            height: 20px;
+            background: #a29bfe;
+            top: 85px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .eyeshadow.left {
+            left: 60px;
+        }
+
+        .eyeshadow.right {
+            right: 60px;
+        }
+
+        .eyeliner {
+            position: absolute;
+            width: 35px;
+            height: 3px;
+            background: #2d3436;
+            top: 95px;
+            transition: all 0.3s ease;
+        }
+
+        .eyeliner.left {
+            left: 62px;
+        }
+
+        .eyeliner.right {
+            right: 62px;
+        }
+
+        .controls {
+            flex: 1;
+            min-width: 300px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .control-group {
+            margin-bottom: 25px;
+        }
+
+        .control-group h3 {
+            color: #e84393;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            border-bottom: 2px solid #ffeaa7;
+            padding-bottom: 5px;
+        }
+
+        .color-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .color-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .color-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .color-btn.active {
+            transform: scale(1.2);
+            box-shadow: 0 0 0 3px white, 0 0 0 5px #e84393;
+        }
+
+        .intensity-control {
+            margin-top: 10px;
+        }
+
+        .intensity-control label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #636e72;
+        }
+
+        .slider {
+            width: 100%;
+            height: 10px;
+            -webkit-appearance: none;
+            background: #ddd;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #e84393;
+            cursor: pointer;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .action-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .save-btn {
+            background: linear-gradient(to right, #00b894, #55efc4);
+            color: white;
+        }
+
+        .reset-btn {
+            background: linear-gradient(to right, #e17055, #fab1a0);
+            color: white;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+        }
+
+        .gallery h2 {
+            text-align: center;
+            color: #e84393;
+            margin-bottom: 20px;
+        }
+
+        .gallery-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .gallery-item {
+            width: 100px;
+            height: 130px;
+            background: #ffe0bd;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .maquillaje-content {
+                flex-direction: column;
+            }
+            
+            .face-container, .controls {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">💄🌸</div>
+            <h1>Portal de Belleza y Maquillaje</h1>
+            <p class="tagline">Tu espacio personal para el cuidado de la piel y la diversión con el maquillaje</p>
+        </header>
+        
+        <div class="button-container">
+            <button class="nav-button product-btn" onclick="mostrarSeccion('mantequillas')">🧴 Mantequillas Corporales</button>
+            <button class="nav-button makeup-btn" onclick="mostrarSeccion('maquillaje')">💋 Maquillaje Virtual</button>
+        </div>
+        
+        <div class="content-area">
+            <!-- Sección de Mantequillas Corporales -->
+            <div id="mantequillas" class="section active">
+                <div class="mantequillas-header">
+                    <div class="mantequillas-logo">🌸</div>
+                    <h1 class="mantequillas-title">Mantequillas Corporales</h1>
+                    <p class="mantequillas-tagline">Descubre el lujo de la hidratación natural con nuestras exclusivas mantequillas corporales</p>
+                </div>
+                
+                <section class="intro">
+                    <p>Las mantequillas corporales son productos naturales elaborados con mantecas y aceites vegetales, diseñados para hidratar, nutrir y proteger la piel. Se caracterizan por ser más densas que las cremas convencionales y están pensadas para pieles secas o sensibles.</p>
+                    <a href="https://cocopinkstore.com/producto/mantequilla-perfumada-corporal-ritual-botanico/" class="btn">Descubre Nuestra Colección</a>
+                </section>
+                
+                <section class="products">
+                    <div class="product-card">
+                        <img src="https://i.etsystatic.com/16773548/r/il/1be390/3362754575/il_fullxfull.3362754575_p9bv.jpg" alt="Mantequilla Corporal Rosa" class="product-img">
+                        <div class="product-info">
+                            <h3 class="product-title">Ritual Botánico</h3>
+                            <p class="product-desc">Mantequilla perfumada con esencias florales que hidrata profundamente tu piel. Textura sedosa que se absorbe rápidamente.</p>
+                            <a href="#" class="btn">Conocer Más</a>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <img src="https://i.pinimg.com/736x/5f/3c/3e/5f3c3e0b1b6d4b4c4e4e4b4e4e4e4e4e.jpg" alt="Mantequilla Corporal Lavanda" class="product-img">
+                        <div class="product-info">
+                            <h3 class="product-title">Sueño de Lavanda</h3>
+                            <p class="product-desc">Calma tus sentidos con esta mantequilla de lavanda para noches de relax. Ideal para masajes relajantes antes de dormir.</p>
+                            <a href="#" class="btn">Conocer Más</a>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <img src="https://i.pinimg.com/736x/8a/7b/8d/8a7b8d8a7b8d8a7b8d8a7b8d8a7b8d8a.jpg" alt="Mantequilla Corporal Vainilla" class="product-img">
+                        <div class="product-info">
+                            <h3 class="product-title">Dulce Vainilla</h3>
+                            <p class="product-desc">Deliciosa mantequilla con aroma a vainilla que nutre y suaviza la piel. Perfecta para uso diario con su fragancia envolvente.</p>
+                            <a href="#" class="btn">Conocer Más</a>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <img src="https://i.pinimg.com/736x/9a/8b/9d/9a8b9d9a8b9d9a8b9d9a8b9d9a8b9d9a.jpg" alt="Mantequilla Corporal Coco" class="product-img">
+                        <div class="product-info">
+                            <h3 class="product-title">Paraíso Tropical</h3>
+                            <p class="product-desc">Mantequilla de coco que transporta tus sentidos a una isla paradisíaca. Hidratación intensiva con aroma exótico.</p>
+                            <a href="#" class="btn">Conocer Más</a>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <img src="https://i.pinimg.com/736x/7c/3d/7a/7c3d7a7c3d7a7c3d7a7c3d7a7c3d7a7a.jpg" alt="Mantequilla Corporal Rosa Mosqueta" class="product-img">
+                        <div class="product-info">
+                            <h3 class="product-title">Esencia de Rosa</h3>
+                            <p class="product-desc">Mantequilla enriquecida con rosa mosqueta para una piel radiante. Propiedades regenerativas y aroma floral delicado.</p>
+                            <a href="#" class="btn">Conocer Más</a>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <img src="https://i.pinimg.com/736x/6d/4a/8d/6d4a8d6d4a8d6d4a8d6d4a8d6d4a8d6d.jpg" alt="Mantequilla Corporal Jazmín" class="product-img">
+                        <div class="product-info">
+                            <h3 class="product-title">Noche de Jazmín</h3>
+                            <p class="product-desc">Fragancia seductora de jazmín en una mantequilla de textura sedosa. Perfecta para ocasiones especiales.</p>
+                            <a href="#" class="btn">Conocer Más</a>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="benefits">
+                    <h2>Beneficios de Nuestras Mantequillas</h2>
+                    <div class="benefits-list">
+                        <div class="benefit-item">
+                            <div class="benefit-icon">💧</div>
+                            <h3>Hidratación Profunda</h3>
+                            <p>Penetra en las capas más profundas de la piel para una hidratación duradera.</p>
+                        </div>
+                        
+                        <div class="benefit-item">
+                            <div class="benefit-icon">🌿</div>
+                            <h3>Ingredientes Naturales</h3>
+                            <p>Elaboradas con mantecas y aceites 100% naturales de la más alta calidad.</p>
+                        </div>
+                        
+                        <div class="benefit-item">
+                            <div class="benefit-icon">✨</div>
+                            <h3>Textura Sedosa</h3>
+                            <p>Se absorbe rápidamente sin dejar sensación grasosa en la piel.</p>
+                        </div>
+                        
+                        <div class="benefit-item">
+                            <div class="benefit-icon">🌸</div>
+                            <h3>Aromas Delicados</h3>
+                            <p>Fragancias sutiles que perduran en la piel durante horas.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Sección de Maquillaje Virtual -->
+            <div id="maquillaje" class="section">
+                <div class="maquillaje-content">
+                    <div class="face-container">
+                        <div class="face">
+                            <div class="eye left"></div>
+                            <div class="eye right"></div>
+                            <div class="eyeshadow left" id="eyeshadow-left"></div>
+                            <div class="eyeshadow right" id="eyeshadow-right"></div>
+                            <div class="eyeliner left" id="eyeliner-left"></div>
+                            <div class="eyeliner right" id="eyeliner-right"></div>
+                            <div class="blush left" id="blush-left"></div>
+                            <div class="blush right" id="blush-right"></div>
+                            <div class="lipstick" id="lipstick"></div>
+                        </div>
+                    </div>
+
+                    <div class="controls">
+                        <div class="control-group">
+                            <h3>💄 Labios</h3>
+                            <div class="color-options" id="lipstick-colors"></div>
+                            <div class="intensity-control">
+                                <label for="lipstick-intensity">Intensidad del Color</label>
+                                <input type="range" id="lipstick-intensity" class="slider" min="0.3" max="1" step="0.1" value="1">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <h3>🌸 Rubor</h3>
+                            <div class="color-options" id="blush-colors"></div>
+                            <div class="intensity-control">
+                                <label for="blush-intensity">Intensidad del Color</label>
+                                <input type="range" id="blush-intensity" class="slider" min="0.3" max="1" step="0.1" value="0.7">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <h3>👁️ Sombra de Ojos</h3>
+                            <div class="color-options" id="eyeshadow-colors"></div>
+                            <div class="intensity-control">
+                                <label for="eyeshadow-intensity">Intensidad del Color</label>
+                                <input type="range" id="eyeshadow-intensity" class="slider" min="0.3" max="1" step="0.1" value="0.8">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <h3>✏️ Delineador</h3>
+                            <div class="color-options" id="eyeliner-colors"></div>
+                            <div class="intensity-control">
+                                <label for="eyeliner-intensity">Grosor</label>
+                                <input type="range" id="eyeliner-intensity" class="slider" min="1" max="5" step="0.5" value="3">
+                            </div>
+                        </div>
+
+                        <div class="actions">
+                            <button class="action-btn save-btn" id="save-btn">💾 Guardar Look</button>
+                            <button class="action-btn reset-btn" id="reset-btn">🔄 Reiniciar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery">
+                    <h2>Galería de Looks Guardados</h2>
+                    <div class="gallery-items" id="gallery"></div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <div class="footer-content">
+                <h3>Portal de Belleza y Maquillaje</h3>
+                <p>Tu espacio para el cuidado personal y la diversión</p>
+                
+                <div class="social-links">
+                    <a href="#">📱</a>
+                    <a href="#">💌</a>
+                    <a href="#">📷</a>
+                    <a href="#">👥</a>
+                </div>
+                
+                <p class="copyright">&copy; 2023 Portal de Belleza. Todos los derechos reservados.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Función para mostrar secciones
+        function mostrarSeccion(seccionId) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.section').forEach(seccion => {
+                seccion.classList.remove('active');
+            });
+            
+            // Mostrar la sección seleccionada
+            document.getElementById(seccionId).classList.add('active');
+        }
+
+        // Código para el juego de maquillaje
+        // Definir colores para cada parte del maquillaje
+        const colors = {
+            lipstick: [
+                { name: 'Rojo Clásico', value: '#e84393' },
+                { name: 'Fucsia', value: '#fd79a8' },
+                { name: 'Marrón', value: '#a55a4d' },
+                { name: 'Coral', value: '#ff7f50' },
+                { name: 'Rosa', value: '#ff9ff3' },
+                { name: 'Vino', value: '#6d214f' },
+                { name: 'Nude', value: '#e0b894' },
+                { name: 'Naranja', value: '#ff9f43' }
+            ],
+            blush: [
+                { name: 'Rosa Suave', value: '#ff9ff3' },
+                { name: 'Durazno', value: '#ffbea3' },
+                { name: 'Coral', value: '#ffafaf' },
+                { name: 'Frambuesa', value: '#ff6b9d' },
+                { name: 'Melocotón', value: '#ffccbc' },
+                { name: 'Lila', value: '#e0b0ff' }
+            ],
+            eyeshadow: [
+                { name: 'Morado', value: '#a29bfe' },
+                { name: 'Azul', value: '#74b9ff' },
+                { name: 'Verde', value: '#55efc4' },
+                { name: 'Dorado', value: '#fdcb6e' },
+                { name: 'Rosa', value: '#ff9ff3' },
+                { name: 'Marrón', value: '#a1887f' },
+                { name: 'Plateado', value: '#dfe6e9' },
+                { name: 'Turquesa', value: '#81ecec' }
+            ],
+            eyeliner: [
+                { name: 'Negro', value: '#2d3436' },
+                { name: 'Marrón', value: '#6d4c41' },
+                { name: 'Azul', value: '#0984e3' },
+                { name: 'Verde', value: '#00b894' },
+                { name: 'Morado', value: '#6c5ce7' },
+                { name: 'Plateado', value: '#b2bec3' }
+            ]
+        };
+
+        // Generar botones de color para cada parte del maquillaje
+        function generateColorButtons() {
+            for (const part in colors) {
+                const container = document.getElementById(`${part}-colors`);
+                colors[part].forEach((color, index) => {
+                    const button = document.createElement('button');
+                    button.className = `color-btn ${index === 0 ? 'active' : ''}`;
+                    button.style.backgroundColor = color.value;
+                    button.setAttribute('data-color', color.value);
+                    button.setAttribute('data-part', part);
+                    button.addEventListener('click', function() {
+                        // Remover clase activa de todos los botones del mismo grupo
+                        document.querySelectorAll(`#${part}-colors .color-btn`).forEach(btn => {
+                            btn.classList.remove('active');
+                        });
+                        // Agregar clase activa al botón clickeado
+                        this.classList.add('active');
+                        // Cambiar el color
+                        changeColor(part, color.value);
+                    });
+                    container.appendChild(button);
+                });
+            }
+        }
+
+        // Cambiar color de una parte del maquillaje
+        function changeColor(part, color) {
+            if (part === 'blush') {
+                document.getElementById('blush-left').style.backgroundColor = color;
+                document.getElementById('blush-right').style.backgroundColor = color;
+            } else if (part === 'eyeshadow') {
+                document.getElementById('eyeshadow-left').style.backgroundColor = color;
+                document.getElementById('eyeshadow-right').style.backgroundColor = color;
+            } else if (part === 'eyeliner') {
+                document.getElementById('eyeliner-left').style.backgroundColor = color;
+                document.getElementById('eyeliner-right').style.backgroundColor = color;
+            } else {
+                document.getElementById(part).style.backgroundColor = color;
+            }
+        }
+
+        // Actualizar intensidad de color
+        function setupIntensityControls() {
+            // Labios
+            document.getElementById('lipstick-intensity').addEventListener('input', function() {
+                const lipstick = document.getElementById('lipstick');
+                const currentColor = lipstick.style.backgroundColor || '#e84393';
+                const rgba = hexToRgba(currentColor, this.value);
+                lipstick.style.backgroundColor = rgba;
+            });
+
+            // Rubor
+            document.getElementById('blush-intensity').addEventListener('input', function() {
+                const blushLeft = document.getElementById('blush-left');
+                const blushRight = document.getElementById('blush-right');
+                const currentColor = blushLeft.style.backgroundColor || '#ff9ff3';
+                const rgba = hexToRgba(currentColor, this.value);
+                blushLeft.style.backgroundColor = rgba;
+                blushRight.style.backgroundColor = rgba;
+            });
+
+            // Sombra de ojos
+            document.getElementById('eyeshadow-intensity').addEventListener('input', function() {
+                const eyeshadowLeft = document.getElementById('eyeshadow-left');
+                const eyeshadowRight = document.getElementById('eyeshadow-right');
+                const currentColor = eyeshadowLeft.style.backgroundColor || '#a29bfe';
+                const rgba = hexToRgba(currentColor, this.value);
+                eyeshadowLeft.style.backgroundColor = rgba;
+                eyeshadowRight.style.backgroundColor = rgba;
+            });
+
+            // Delineador
+            document.getElementById('eyeliner-intensity').addEventListener('input', function() {
+                const eyelinerLeft = document.getElementById('eyeliner-left');
+                const eyelinerRight = document.getElementById('eyeliner-right');
+                const height = `${this.value}px`;
+                eyelinerLeft.style.height = height;
+                eyelinerRight.style.height = height;
+            });
+        }
+
+        // Convertir color hexadecimal a RGBA con opacidad
+        function hexToRgba(hex, opacity) {
+            // Si ya es un valor rgba, extraer el color hexadecimal
+            if (hex.startsWith('rgba')) {
+                const rgb = hex.match(/\d+/g);
+                return `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${opacity})`;
+            }
+            
+            // Si es un valor hexadecimal
+            let r = 0, g = 0, b = 0;
+            
+            // Formato de 3 dígitos
+            if (hex.length === 4) {
+                r = parseInt(hex[1] + hex[1], 16);
+                g = parseInt(hex[2] + hex[2], 16);
+                b = parseInt(hex[3] + hex[3], 16);
+            }
+            // Formato de 6 dígitos
+            else if (hex.length === 7) {
+                r = parseInt(hex[1] + hex[2], 16);
+                g = parseInt(hex[3] + hex[4], 16);
+                b = parseInt(hex[5] + hex[6], 16);
+            }
+            
+            return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+        }
+
+        // Guardar look en la galería
+        function setupSaveButton() {
+            document.getElementById('save-btn').addEventListener('click', function() {
+                const gallery = document.getElementById('gallery');
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item';
+                
+                // Crear una miniatura del look actual
+                const face = document.querySelector('.face').cloneNode(true);
+                face.style.width = '100%';
+                face.style.height = '100%';
+                face.style.margin = '0';
+                
+                galleryItem.appendChild(face);
+                gallery.appendChild(galleryItem);
+                
+                // Mostrar mensaje de éxito
+                alert('¡Look guardado en la galería!');
+            });
+        }
+
+        // Reiniciar maquillaje
+        function setupResetButton() {
+            document.getElementById('reset-btn').addEventListener('click', function() {
+                // Restablecer colores predeterminados
+                changeColor('lipstick', '#e84393');
+                changeColor('blush', '#ff9ff3');
+                changeColor('eyeshadow', '#a29bfe');
+                changeColor('eyeliner', '#2d3436');
+                
+                // Restablecer intensidades
+                document.getElementById('lipstick-intensity').value = 1;
+                document.getElementById('blush-intensity').value = 0.7;
+                document.getElementById('eyeshadow-intensity').value = 0.8;
+                document.getElementById('eyeliner-intensity').value = 3;
+                
+                // Restablecer botones activos
+                document.querySelectorAll('.color-btn').forEach((btn, index) => {
+                    btn.classList.remove('active');
+                    if (index === 0) btn.classList.add('active');
+                });
+                
+                // Aplicar cambios de intensidad
+                document.getElementById('lipstick-intensity').dispatchEvent(new Event('input'));
+                document.getElementById('blush-intensity').dispatchEvent(new Event('input'));
+                document.getElementById('eyeshadow-intensity').dispatchEvent(new Event('input'));
+                document.getElementById('eyeliner-intensity').dispatchEvent(new Event('input'));
+            });
+        }
+
+        // Inicializar la aplicación
+        function init() {
+            generateColorButtons();
+            setupIntensityControls();
+            setupSaveButton();
+            setupResetButton();
+        }
+
+        // Ejecutar cuando se cargue la página
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
